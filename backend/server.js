@@ -3,6 +3,8 @@ require('dotenv').config()
 
 //This line tells the file that Express.js is required to run this file//
 const express = require('express')
+//Require mongoose package
+const mongoose = require('mongoose')
 //This points to the Rounds Routes file
 const roundRoutes = require('./routes/Rounds')
 
@@ -20,9 +22,16 @@ app.use((req, res, next) =>{
 //Route Handler pointing to routes set up in Rounds file
 app.use('/api/Rounds',roundRoutes)
 
-//Listen for requests on a certain port and then log them to the console
-app.listen (process.env.PORT, () =>{
-    console.log('listening for port')
-})
+//Connect to DB and post error if error
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        //Listen for requests on a certain port and then log them to the console
+        app.listen (process.env.PORT, () =>{
+            console.log('connected to db and listening on port')
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
 process.env
