@@ -1,32 +1,24 @@
 //Require express to run routes
 const express = require('express')
-const Round = require('../models/roundsModel')
+//Requires controller file and function to run routes
+const {
+    createRound,
+    getRounds,
+    getRound
+
+} = require ('../controllers/roundsController')
 
 //Create router vsriable
 const router = express.Router()
 
 //Route to get all Rounds
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all Rounds'})
-})
+router.get('/', getRounds)
 
 //Route to get a single Round
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET single Round'})
-})
+router.get('/:id', getRound)
 
 //Post a new round
-router.post('/', async(req, res) => {
-    const {course, date, player, score} = req.body
-
-    try{
-        const round = await Round.create({course, date, player, score})
-        res.status(200).json(round)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-
-    }
-})
+router.post('/', createRound)
 
 //Delete a round
 router.delete('/:id', (req, res) => {
