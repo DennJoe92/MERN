@@ -12,7 +12,7 @@ const getRounds = async (req, res) => {
 //GET a single Round
 const getRound = async (req, res) => {
     const { id } = req.params
-    
+
 //Validation in mongoose to make sure ID is correct format and if not give 404
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such Round'})
@@ -42,8 +42,34 @@ const createRound = async (req, res) => {
 
 
 //Delete a Round
+const deleteRound = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such Round'})
+}
+const round = await Round.findOneAndDelete({_id: id})
+if(!round) {
+    return res.status(400).json({error: 'No such Round'})
+}
+
+res.status(200).json(round)
+}
 
 //Update a Round
+const updateRound = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such Round'})
+}
+const round = await Round.findOneAndUpdate({_id: id}, {
+    ...req.body
+})
+if(!round) {
+    return res.status(400).json({error: 'No such Round'})
+}
+
+res.status(200).json(round)
+}
 
 
 //Export funtion
@@ -51,5 +77,7 @@ module.exports = {
     
     getRounds,
     getRound,
-    createRound
+    createRound,
+    deleteRound,
+    updateRound
 }

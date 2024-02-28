@@ -4,7 +4,9 @@ const express = require('express')
 const {
     createRound,
     getRounds,
-    getRound
+    getRound,
+    deleteRound,
+    updateRound
 
 } = require ('../controllers/roundsController')
 
@@ -21,14 +23,10 @@ router.get('/:id', getRound)
 router.post('/', createRound)
 
 //Delete a round
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a Round'})
-})
+router.delete('/:id',deleteRound)
 
 //Update a round
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a Round'})
-})
+router.patch('/:id', updateRound)
 
 //export the router
-module.exports = router 
+module.exports = router
