@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 
 //import components
-import RoundDetails from "../components/roundDetails"
+import RoundDetails from "../components/roundDetails.js"
+import NewRoundForm from "../components/NewRoundForm.js"
 
 const Home = () => {
     const [rounds, setRounds] = useState(null)
@@ -14,11 +15,11 @@ const Home = () => {
             if (response.ok) {
                 setRounds(json)
            
-
+            }
         }
 
         fetchRounds()
-    }, [])
+    }, []);
 
     return (
         <div className="home">
@@ -28,6 +29,7 @@ const Home = () => {
                     
                 ))}
         </div>
+        <NewRoundForm />
     </div>
     )
                 }
