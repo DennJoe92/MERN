@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 //function to create a new schema
 const Schema = mongoose.Schema
 
+//function to bring in league details to schema
+const League = require('./leagueModel')
+
 //Strucutre of data
 const playerSchema = new Schema ({
     name: {
@@ -19,9 +22,11 @@ const playerSchema = new Schema ({
         required: true
     },
     league: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'League',
         required: true
     },
+    leagueName: String,
     
 
 },{timestamps: true})
