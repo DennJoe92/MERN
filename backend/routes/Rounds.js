@@ -10,7 +10,7 @@ const {
 
 } = require ('../controllers/roundsController')
 
-//Create router vsriable
+//Create router variable
 const router = express.Router()
 
 //Route to get all Rounds
