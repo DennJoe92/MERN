@@ -13,7 +13,8 @@ const Home = () => {
 
             if (response.ok) {
                 setRounds(json)
-            }
+           
+
         }
 
         fetchRounds()
