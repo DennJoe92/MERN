@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-
+import {useRoundsContext} from "../hooks/useRoundsContext"
 //import components
 import RoundDetails from "../components/roundDetails.js"
 import NewRoundForm from "../components/NewRoundForm.js"
 
 const Home = () => {
-    const [rounds, setRounds] = useState(null)
+    const {rounds, dispatch} = useRoundsContext()
     
     useEffect(() => {
         const fetchRounds = async () => {
@@ -13,7 +13,7 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setRounds(json)
+               dispatch({type: 'SET_ROUNDS', payload: json})
            
             }
         }

@@ -1,7 +1,10 @@
 import {useState} from 'react'
+import {useRoundsContext} from "../hooks/useRoundsContext"
 
 //form properties
 const NewRoundForm = () => {
+    const {dispatch } = useRoundsContext ()
+
     const [course, setCourse] = useState ('')
     const [player, setPlayer] = useState ('')
     const [score, setScore] = useState ('')
@@ -34,6 +37,7 @@ const NewRoundForm = () => {
         setDate ('')
         setError(null)
         console.log('new Round added', json)
+        dispatch({type: 'CREATE_ROUNDS', payload: json})
     }
 }
 
