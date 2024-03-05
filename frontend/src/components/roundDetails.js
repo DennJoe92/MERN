@@ -1,4 +1,6 @@
 const RoundDetails = ({ round }) => {
+
+
     return (
         <div className="round-details">
             <h4>{round.course}</h4>
@@ -6,6 +8,7 @@ const RoundDetails = ({ round }) => {
             <p><strong>Score:</strong>{round.score}</p>
             <p>{round.date}</p>
         </div>
-    )
-}
-export default RoundDetails
+    );
+};
+
+export default RoundDetails;
