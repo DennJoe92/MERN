@@ -5,33 +5,28 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 //Strucutre of data
-const leagueSchema = new Schema ({
-    leagueName: {
+const courseSchema = new Schema ({
+    courseName: {
         type: String,
         required: true
     },
-    courses: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+    coursePar: {
+        type: Number,
         required: true
     },
-    startDate: {
-        type: Date,
+    yardage: {
+        type: number,
         required: true
     },
-    endDate: {
-        type: Date,
-        required: true
-    },
-    scoringMethod: {
+    teePosition: {
         type: String,
-        required: true
+        required: false
     },
 
 },{timestamps: true})
 
 //Create a model and apply schema
 
-const League = mongoose.model('League',leagueSchema)
+const Course = mongoose.model('League',courseSchema)
 
-module.exports = League
+module.exports = Course

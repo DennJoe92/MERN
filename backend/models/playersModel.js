@@ -19,14 +19,13 @@ const playerSchema = new Schema ({
     },
     currentHandicap: {
         type: Number,
-        required: true
+        required: false
     },
     league: {
         type: Schema.Types.ObjectId,
         ref: 'League',
         required: true
     },
-    leagueName: String,
     
 
 },{timestamps: true})
