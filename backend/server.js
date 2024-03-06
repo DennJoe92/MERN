@@ -7,6 +7,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 //This points to the Rounds Routes file
 const roundRoutes = require('./routes/Rounds')
+//This points to the Course Routes file
+const coursesRoutes = require('./routes/Courses')
 
 //This then runs the express app
 const app = express ()
@@ -21,6 +23,7 @@ app.use((req, res, next) =>{
 
 //Route Handler pointing to routes set up in Rounds file
 app.use('/api/Rounds',roundRoutes)
+app.use('/api/Courses',coursesRoutes)
 
 //Connect to DB and post error if error
 mongoose.connect(process.env.MONGO_URI)
