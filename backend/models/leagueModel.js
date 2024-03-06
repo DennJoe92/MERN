@@ -7,12 +7,12 @@ const Schema = mongoose.Schema
 //Strucutre of data
 const leagueSchema = new Schema ({
     leagueName: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
         required: true
     },
     courses: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+        type: String,
         required: true
     },
     startDate: {
