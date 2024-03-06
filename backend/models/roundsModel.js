@@ -7,8 +7,7 @@ const Schema = mongoose.Schema
 //Strucutre of data
 const roundSchema = new Schema ({
     course: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Course',
+            type: String,
             required: true
         },
     date: {
@@ -16,17 +15,12 @@ const roundSchema = new Schema ({
         required: true
     },
     player: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Player',
             required: true
         },
     score: {
         type: Number,
-        required: true
-    },
-    league: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'League',
         required: true
     },
 

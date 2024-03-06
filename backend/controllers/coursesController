@@ -1,10 +1,10 @@
-const Course = require('../models/roundsModel')
+const Course = require('../models/courseModel')
 const mongoose = require('mongoose')
 
 //GET all Courses
 const getCourses = async (req, res) => {
     //This finds all rounds and sorts on created date, will want to change this to be top 7 rounds
-    const courses = await Round.find({}).sort ({createdAT: -1})
+    const courses = await Course.find({}).sort ({createdAT: -1})
 
     res.status(200).json(courses)
 }

@@ -15,7 +15,7 @@ const courseSchema = new Schema ({
         required: true
     },
     yardage: {
-        type: number,
+        type: Number,
         required: true
     },
     teePosition: {
