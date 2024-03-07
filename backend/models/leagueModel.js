@@ -5,14 +5,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 //Strucutre of data
-const leagueSchema = new Schema ({
+const LeagueSchema = new Schema ({
     leagueName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+        type: String,
         required: true
     },
     courses: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Courses',
         required: true
     },
     startDate: {
@@ -32,6 +32,6 @@ const leagueSchema = new Schema ({
 
 //Create a model and apply schema
 
-const League = mongoose.model('League',leagueSchema)
+const League = mongoose.model('League',LeagueSchema)
 
 module.exports = League

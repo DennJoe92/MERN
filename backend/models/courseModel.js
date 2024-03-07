@@ -27,6 +27,6 @@ const courseSchema = new Schema ({
 
 //Create a model and apply schema
 
-const Course = mongoose.model('League',courseSchema)
+const Course = mongoose.model('Course',courseSchema)
 
 module.exports = Course

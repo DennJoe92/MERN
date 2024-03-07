@@ -22,7 +22,7 @@ app.use((req, res, next) =>{
     next()
 })
 
-//Route Handler pointing to routes set up in Rounds file
+//Route Handler pointing to routes set up in file
 app.use('/api/Rounds',roundRoutes)
 app.use('/api/Courses',coursesRoutes)
 app.use('/api/Leagues',leaguesRoutes)

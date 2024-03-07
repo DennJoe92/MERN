@@ -18,22 +18,22 @@ const getLeague = async (req, res) => {
         return res.status(404).json({error: 'No such League'})
     }
 
-    const leagues = await League.findById(id)
+    const league = await League.findById(id)
 
-    if(!leagues) {
+    if(!league) {
         return res.status(404).json({error: 'No such League'})
     }
 
-    res.status(200).json(leagues)
+    res.status(200).json(league)
 }
 
-//Create new Course
+//Create new League
 const createLeague = async (req, res) => {
-    const {leagueName, courses , startDate, endDate, scoringMethod} = req.body
+    const {leagueName, courses, startDate, endDate, scoringMethod} = req.body
 
     //add doc to db
     try{
-        const league = await League.create({leagueName, courses, startDate, endDate, scoringMethod })
+        const league = await League.create({leagueName, courses, startDate, endDate, scoringMethod})
         res.status(200).json(league)
     } catch (error) {
         res.status(400).json({error: error.message});
