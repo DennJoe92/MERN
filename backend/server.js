@@ -10,7 +10,7 @@ const roundRoutes = require('./routes/Rounds')
 //This points to the Course Routes file
 const coursesRoutes = require('./routes/Courses')
 const leaguesRoutes = require('./routes/Leagues')
-
+const playersRoutes = require('./routes/Players')
 //This then runs the express app
 const app = express ()
 
