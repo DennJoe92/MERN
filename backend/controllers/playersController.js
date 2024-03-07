@@ -1,4 +1,5 @@
 const Player = require('../models/playersModel')
+const League = require('../models/leagueModel')
 const mongoose = require('mongoose')
 
 //GET all Players
@@ -35,7 +36,7 @@ const createPlayer = async (req, res) => {
     const leagueArray = Array.isArray(league) ? league : [league];
 
     // Convert courses array to array of ObjectId
-    const leagueIds = [];
+    const leagueIDs = [];
 
     
 // Iterate over the courses array to find the corresponding ObjectId for each course name
@@ -44,9 +45,9 @@ for (const leagueName of leagueArray) {
         // Find the course ObjectId by course name
         const league = await Player.findOne({ leagueName });
         
-        // If the course is found, push its ObjectId to the leagueIds array
+        // If the course is found, push its ObjectId to the leagueIDs array
         if (league) {
-            leagueIds.push(league._id);
+            leagueIDs.push(league._id);
         } else {
             // If the course is not found, return an error
             return res.status(404).json({ error: `League not found for name: ${leagueName}` });
@@ -92,7 +93,7 @@ const { name, startingHandicap, currentHandicap, league } = req.body;
 const leagueArray = Array.isArray(league) ? league : [league];
 
 // Convert courses array to array of ObjectId
-const leagueIds = [];
+const leagueIDs = [];
 
 // Iterate over the courses array to find the corresponding ObjectId for each league name
 for (const leagueName of leagueArray) {
@@ -100,9 +101,9 @@ for (const leagueName of leagueArray) {
         // Find the course ObjectId by course name
         const league = await League.findOne({ leagueName });
         
-        // If the course is found, push its ObjectId to the leagueIds array
+        // If the course is found, push its ObjectId to the leagueIDs array
         if (league) {
-            leagueIds.push(league._id);
+            leagueIDs.push(league._id);
         } else {
             // If the league is not found, return an error
             return res.status(404).json({ error: `league not found for name: ${leagueName}` });
@@ -114,12 +115,12 @@ for (const leagueName of leagueArray) {
 }
 
 try {
-    const updatePlayer = await Player.findOneAndUpdate(
+    const updatedPlayer = await Player.findOneAndUpdate(
         { _id: id },
         { name, startingHandicap, currentHandicap, league: leagueIDs },
         { new: true } // Return the updated document
     );
-    res.status(200).json(updatePlayer);
+    res.status(200).json(updatedPlayer);
 } catch (error) {
     res.status(400).json({ error: error.message });
 }
