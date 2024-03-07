@@ -10,11 +10,11 @@ const LeagueSchema = new Schema ({
         type: String,
         required: true
     },
-    courses: {
+    courses: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Courses',
         required: true
-    },
+    }],
     startDate: {
         type: Date,
         required: true

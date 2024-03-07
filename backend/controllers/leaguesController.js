@@ -1,4 +1,5 @@
 const League = require('../models/leagueModel')
+const Course = require('../models/courseModel')
 const mongoose = require('mongoose')
 
 //GET all Leagues
@@ -31,9 +32,34 @@ const getLeague = async (req, res) => {
 const createLeague = async (req, res) => {
     const {leagueName, courses, startDate, endDate, scoringMethod} = req.body
 
+    // Ensure courses is an array
+    const coursesArray = Array.isArray(courses) ? courses : [courses];
+
+    // Convert courses array to array of ObjectId
+    const courseIds = [];
+
+    
+// Iterate over the courses array to find the corresponding ObjectId for each course name
+for (const courseName of coursesArray) {
+    try {
+        // Find the course ObjectId by course name
+        const course = await Course.findOne({ courseName });
+        
+        // If the course is found, push its ObjectId to the courseIds array
+        if (course) {
+            courseIds.push(course._id);
+        } else {
+            // If the course is not found, return an error
+            return res.status(404).json({ error: `Course not found for name: ${courseName}` });
+        }
+    } catch (error) {
+        // Handle any errors that occur during the query
+        return res.status(500).json({ error: error.message });
+    }
+}
     //add doc to db
     try{
-        const league = await League.create({leagueName, courses, startDate, endDate, scoringMethod})
+        const league = await League.create({leagueName, courses: courseIds, startDate, endDate, scoringMethod})
         res.status(200).json(league)
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -61,14 +87,43 @@ const updateLeague = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such League'})
 }
-const league = await League.findOneAndUpdate({_id: id}, {
-    ...req.body
-})
-if(!league) {
-    return res.status(400).json({error: 'No such League'})
+const { leagueName, courses, startDate, endDate, scoringMethod } = req.body;
+
+// Ensure courses is an array
+const coursesArray = Array.isArray(courses) ? courses : [courses];
+
+// Convert courses array to array of ObjectId
+const courseIds = [];
+
+// Iterate over the courses array to find the corresponding ObjectId for each course name
+for (const courseName of coursesArray) {
+    try {
+        // Find the course ObjectId by course name
+        const course = await Course.findOne({ courseName });
+        
+        // If the course is found, push its ObjectId to the courseIds array
+        if (course) {
+            courseIds.push(course._id);
+        } else {
+            // If the course is not found, return an error
+            return res.status(404).json({ error: `Course not found for name: ${courseName}` });
+        }
+    } catch (error) {
+        // Handle any errors that occur during the query
+        return res.status(500).json({ error: error.message });
+    }
 }
 
-res.status(200).json(league)
+try {
+    const updatedLeague = await League.findOneAndUpdate(
+        { _id: id },
+        { leagueName, courses: courseIds, startDate, endDate, scoringMethod },
+        { new: true } // Return the updated document
+    );
+    res.status(200).json(updatedLeague);
+} catch (error) {
+    res.status(400).json({ error: error.message });
+}
 }
 
 
