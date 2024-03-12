@@ -42,8 +42,8 @@ const createPlayer = async (req, res) => {
 // Iterate over the courses array to find the corresponding ObjectId for each course name
 for (const leagueName of leagueArray) {
     try {
-        // Find the course ObjectId by course name
-        const league = await Player.findOne({ leagueName });
+        // Find the league ObjectId by course name
+        const league = await League.findOne({ leagueName });
         
         // If the course is found, push its ObjectId to the leagueIDs array
         if (league) {

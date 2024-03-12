@@ -26,6 +26,7 @@ app.use((req, res, next) =>{
 app.use('/api/Rounds',roundRoutes)
 app.use('/api/Courses',coursesRoutes)
 app.use('/api/Leagues',leaguesRoutes)
+app.use('/api/Players',playersRoutes)
 
 //Connect to DB and post error if error
 mongoose.connect(process.env.MONGO_URI)

@@ -4,20 +4,26 @@ const mongoose = require('mongoose')
 //function to create a new schema
 const Schema = mongoose.Schema
 
+//function to bring in details to schema
+const Course = require('./courseModel');
+const Player = require('./playersModel')
+
+
 //Strucutre of data
 const roundSchema = new Schema ({
     course: {
-            type: String,
-            required: true
+        type: Schema.Types.ObjectId,
+        ref: 'Course',
+        required: true
         },
     date: {
         type: Date,
         required: true
     },
     player: {
-            type: String,
-            ref: 'Player',
-            required: true
+        type: Schema.Types.ObjectId,
+        ref: 'Player',
+        required: true
         },
     score: {
         type: Number,
